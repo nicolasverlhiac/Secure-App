@@ -39,6 +39,7 @@
                     <div class="info-box-icon width-70" id="notif">
                         <p>En attente des coordonnées ... </p>
                     </div>
+                    <div id="report-erreur"></div>
                 </div>
             </div>
             <div class="cols-row">

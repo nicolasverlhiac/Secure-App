@@ -14,6 +14,34 @@ $(document).ready(function () {
 
 	  $('#pulse').addClass("ready"); 
 
+	      $('#pulse').click(function(){
+	  		$('#pulse').addClass("danger");
+	  		$( ".pulse" ).effect( "scale", "slow" );
+	  		document.querySelector('#status').innerHTML = '<img class="pulse" src="img/shield-help-icon.png" />';
+
+
+	  		/* Création d'un report
+	  		============================ */ 
+	  		  var posLatitude = position.coords.latitude;
+	  		  var posLongitude = position.coords.longitude;
+
+	  		  $.ajax({
+	  		    type: "POST",
+	  		    url: "includes/functions.ajax.php",
+	  		    data: {
+	  		      "action":"addReport",
+	  		      "longitude":posLongitude,
+	  		      "latitude":posLatitude},
+	  		    success: function(msg){
+	  		      if (msg == "OK") {
+	  		        $("#report-erreur").html('<div class="info-box width-100"><p>SOS Bien envoyé.</p> </div>');
+	  		      } else {
+	  		        $("#report-erreur").html('<div class="danger-box width-100"><p>'+msg+'</p> </div>');
+	  		      }
+	  		    }
+	  		  });
+	  	});
+
 	}
 
 	function error(msg) {
@@ -48,13 +76,5 @@ $(document).ready(function () {
     }
     addCircle();
     setInterval(addCircle, 1200);
-
-
-
-    $('#pulse').click(function(){
-		$('#pulse').addClass("danger");
-		$( ".pulse" ).effect( "scale", "slow" );
-		document.querySelector('#status').innerHTML = '<img class="pulse" src="img/shield-help-icon.png" />';
-	});
 
 });
